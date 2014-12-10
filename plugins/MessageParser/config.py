@@ -82,5 +82,8 @@ conf.registerChannelValue(MessageParser, 'listSeparator',
 conf.registerChannelValue(MessageParser, 'maxTriggers',
     registry.Integer(0, _("""Determines the maximum number of triggers in
     one message. Set this to 0 to allow an infinite number of triggers.""")))
+conf.registerChannelValue(MessageParser, 'OneToOne',
+    registry.Boolean(False, _("""Determines whether results are sent in
+    different lines or all in the same one.""")))
 
 # vim:set shiftwidth=4 tabstop=4 expandtab textwidth=79:

@@ -406,7 +406,11 @@ class MessageParser(callbacks.Plugin, plugins.ChannelDBHandler):
 
         s = [ "\x02#%d\x02: %s" % (regexp[1], regexp[0]) for regexp in regexps ]
         separator = self.registryValue('listSeparator', channel)
-        irc.reply(separator.join(s))
+        if not self.registryValue('oneToOne', channel):
+            irc.reply(separator.join(s))
+            return
+        for row in s:
+            irc.reply(row)
     list = wrap(list, ['channelOrGlobal'])
 
     @internationalizeDocstring

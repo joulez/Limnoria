@@ -136,6 +136,16 @@ class MessageParserTestCase(ChannelPluginTestCase):
         self.assertRegexp('messageparser list', '\x02#1\x02: stuff')
         self.assertNotError('messageparser add "aoeu" "echo vowels are nice!"')
         self.assertRegexp('messageparser list', '\x02#1\x02: stuff, \x02#2\x02: aoeu')
+
+    def testListOneToOne(self): #Not sure how to test for multiple replies.
+        self.assertRegexp('messageparser list', 
+                'There are no regexp triggers in the database\.')
+        self.assertNotError('config channel #test'
+                ' plugins.messageparser.onetoone True')
+        self.assertNotError('messageparser add "stuff" "echo i saw some stuff"')
+        self.assertRegexp('messageparser list', '\x02#1\x02: stuff')
+        self.assertNotError('messageparser add "aoeu" "echo vowels are nice!"')
+        self.assertRegexp('messageparser list', '\x02#1\x02: stuff')
         
     def testRemove(self):
         self.assertError('messageparser remove "stuff"')
