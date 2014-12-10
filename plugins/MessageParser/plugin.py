@@ -409,8 +409,10 @@ class MessageParser(callbacks.Plugin, plugins.ChannelDBHandler):
         if not self.registryValue('oneToOne', channel):
             irc.reply(separator.join(s))
             return
-        for row in s:
-            irc.reply(row)
+        else:
+            irc.replies(s)
+#        for row in s:
+#            irc.reply(row)
     list = wrap(list, ['channelOrGlobal'])
 
     @internationalizeDocstring
